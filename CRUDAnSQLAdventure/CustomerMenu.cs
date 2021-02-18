@@ -166,7 +166,7 @@ namespace CRUDAnSQLAdventure
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ClearTextBoxes();
+            //ClearTextBoxes();
             using (SqlConnection conn = new SqlConnection(db.GetConnection()))
             {
                 
@@ -180,8 +180,23 @@ namespace CRUDAnSQLAdventure
                 SqlDataReader dr = cmd.ExecuteReader();
                 dr.Read();
 
-                TitleTextBox.Text = dr.GetString(1);
-                FirstNameTextBox.Text = dr.GetString(2);
+                if (dr.IsDBNull(1))
+                {
+                    TitleTextBox.Text = string.Empty;
+                }
+                else {
+
+                    TitleTextBox.Text = dr.GetString(1);
+                }
+                if (dr.IsDBNull(2))
+                {
+                    FirstNameTextBox.Text = string.Empty;
+                }
+                else
+                {
+
+                    FirstNameTextBox.Text = dr.GetString(2);
+                }
                 if (dr.IsDBNull(3))
                 {
                     MiddleNameBox.Text = string.Empty;
